@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+<h1>Movie System</h1>
+
+
+{% block body %}
+<div class="container">
+   <h1>Query Results:</h1>
+   <div class="box">
+   <table>
+      <tr>
+         <th>Title</th>
+         <th>Year</th>
+      </tr>
+      {% for mov in movie %}
+      <tr>
+         <td>{{ mov.title }}</td>
+         <td>{{ mov.year}}</td>
+      </tr>
+      {%endfor%}
+   </table>
+   </div>
+   <div class="box">
+      <table>
+          <tr>
+              <th>Director Names</th>
+          </tr>
+          {% for dir in directors %}
+          <tr>
+              <td>{{ dir.name }}</td>
+          </tr>
+          {%endfor%}
+      </table>
+   </div>
+   <div class="search">
+      <form method="POST" action="">
+          {{ form.hidden_tag()  }}
+          <fieldset class="form-group">
+              <legend class="border-bottom mb-4">Søkefelt</legend>
+              <div class="form-group">
+                  {{ form.directorName.label(class="form-control-label") }}
+                  {{ form.directorName(class="form-control form-control-lg") }}
+              </div>
+          </fieldset>
+          <div class="form-group">
+              {{ form.submit(class="btn btn-outline-info")}}
+          </div>
+      </form>
+  </div>
+   <div class ="Specific">
+         {% for spec in specific[:1] %}
+            <h4>Movies directed by: {{spec.director}}  </h4>
+         {%endfor%}
+         <table>
+            <tr>
+               <th>Title</th>
+               <th>Rating</th>
+            </tr>
+            {% for spec in specific %}
+            <tr>
+               <td>{{spec.name}}</td>
+               <td>{{spec.rating}}</td>
+            </tr>
+            {%endfor%}
+      </table>
+   </div>
+   <!---
+      {% for mov in movie %}
+      <div class="vertical-menu">
+         <a href="#">{{ mov.title }}</a>
+         <a href="#">{{ mov.year }}</a> 
+      </div>
+      {% endfor %}
+   </div>
+   -->
+</div>
+
+{% endblock %}
